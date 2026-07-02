@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const latestPosts = posts
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+
+const formatDate = (date: Date) => {
+	const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(date);
+	const day = new Intl.DateTimeFormat('en-US', { day: 'numeric' }).format(date);
+	const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
+	const year = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(date);
+	return `${weekday}, ${day} ${month} ${year}`;
+};
+
+const sectionClass = 'max-lg:w-[87%] mx-auto max-w-3xl py-10';
+---
+
+<section id="blogs" class={sectionClass}>
+	<h2 class="text-pretty text-2xl font-bold tracking-tight"><span class="sr-only">Read my </span>Blogs</h2>
+	<p class="text-balance pt-3 pb-6 text-zinc-400">A few things I've written while building for the web - and what I picked up along the way.</p>
+	<div class="divide-y divide-zinc-800">
+		{
+			latestPosts.map((post) => (
+				<article class="py-4 first:pt-0">
+					<p class="text-sm text-zinc-400">{formatDate(post.data.pubDate)}</p>
+					<h3 class="pt-1 text-lg font-semibold tracking-tight text-pretty">
+						<a class="transition-colors hover:text-zinc-300" href={`/blogs/${post.id}`}>{post.data.title}</a>
+					</h3>
+				</article>
+			))
+		}
+	</div>
+	<a class="inline-flex items-center gap-2 pt-4 font-semibold text-zinc-400 transition-colors hover:text-zinc-50" href="/blogs">Read all blogs <span aria-hidden="true">&nearr;</span></a>
+</section>

@@ -1,0 +1,188 @@
+---
+const archiveItems = [
+	{
+		year: '2026',
+		title: 'Still at BBO',
+		body: [
+			"Still grinding at BBO (PT Bizgital Indonesia), lowkey keeping the core POS system from crashing. Mostly just debugging databases, building clean APIs, and making sure payment integrations work seamlessly. We coding fr.",
+		],
+	},
+	{
+		year: '2025',
+		title: 'Graduation',
+		body: [
+			"Officially graduated with a Bachelor's in Informatics from Universitas Muria Kudus. Juggling my thesis and a full-time dev job was a major flex, tbh. We made it out of the trenches!",
+		],
+	},
+	{
+		year: '2024',
+		title: 'Full Time at BBO',
+		body: [
+			"Secured the full-time bag as a Software Engineer at BBO. Went from a part-time student to owning backend features, payment microservices, and speed-running query optimizations. Huge glow up, no cap.",
+		],
+	},
+	{
+		year: '2023',
+		title: 'Bangkit Academy',
+		body: [
+			"Got accepted into Bangkit Academy's software engineering path. Was locked in the whole program learning production-ready system designs, cloud systems, and building with awesome folks. Core memory unlocked.",
+		],
+	},
+	{
+		year: '2022',
+		title: 'Working Student',
+		body: [
+			"Began my dev era at Esoffplay as a part-time backend dev while in my sophomore year. Juggling uni classes and coding production databases was lowkey stressful but we cooked.",
+		],
+	},
+	{
+		year: '2021',
+		title: 'Entering University',
+		body: [
+			"Started my higher education era at Universitas Muria Kudus majoring in Informatics. Finally started learning computer science for real instead of just copying code from YouTube tutorials.",
+		],
+	},
+	{
+		year: '2020',
+		title: 'The Pandemic Spark',
+		body: [
+			"The pandemic hit and I was bored out of my mind. Decided to start my coding villain arc—teaching myself HTML, CSS, and JS every single day. Just pure grinding, no distractions.",
+		],
+	},
+	{
+		year: '2019',
+		title: 'High School Era',
+		body: [
+			"Back in high school at SMK Permata Nusantara. Zero coding knowledge, no idea what a server was, just vibes and gaming. Coding wasn't even on my radar, fr.",
+		],
+	},
+];
+
+const sectionClass = 'max-lg:w-[87%] mx-auto max-w-3xl py-10';
+---
+
+<section id="archive" class={sectionClass}>
+	<h2 class="text-pretty text-2xl font-bold pb-4 tracking-tight"><span class="sr-only">My Journey in Software Engineering - </span>Archive</h2>
+	<p class="text-balance pb-4">I started my software engineering journey in 2019, and ever since, I've been passionate about creating meaningful work. But there's more to recall.</p>
+	<div class="relative flex w-full flex-col before:absolute before:top-[1.875rem] before:bottom-[1.875rem] before:left-0 before:w-0.5 before:bg-zinc-800">
+		{
+			archiveItems.map((item, index) => (
+				<details class="group relative border-none before:absolute before:top-[1.875rem] before:left-0 before:h-0.5 before:w-5 before:bg-zinc-800">
+					<summary class="group relative flex cursor-pointer items-start justify-between rounded-md py-4 pr-4 pl-6 text-left text-xl font-semibold outline-none transition-all marker:hidden focus-visible:ring-3 focus-visible:ring-zinc-500/50">
+						{index === 0 && <span aria-hidden="true" class="absolute top-[1.3125rem] -left-[0.5625rem] hidden size-5 rounded-full bg-emerald-500/75 motion-safe:animate-ping sm:block" />}
+						<span aria-hidden="true" class:list={['absolute top-[1.4688rem] -left-1.5 size-3.5 rounded-full border-2', index === 0 ? 'border-emerald-500 bg-emerald-500' : 'border-zinc-800 bg-zinc-950']} />
+						<span><span class="text-zinc-400">{item.year}</span><span class="sr-only">{item.title}</span><span aria-hidden="true"> - {item.title}</span></span>
+						<svg class="ml-auto size-4 shrink-0 fill-none stroke-zinc-400 stroke-2 transition-transform [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true" viewBox="0 0 24 24">
+							<path d="m6 9 6 6 6-6" />
+						</svg>
+					</summary>
+					<div class="pt-0 pb-4 pl-6 text-sm text-zinc-400 [&_p:not(:last-child)]:pb-2.5 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-zinc-50">
+						{item.body.map((paragraph) => <p>{paragraph}</p>)}
+					</div>
+				</details>
+			))
+		}
+	</div>
+</section>
+
+<!-- Client-side script for smooth Accordion animations -->
+<script>
+	class Accordion {
+		el: HTMLDetailsElement;
+		summary: HTMLElement;
+		content: HTMLElement;
+		animation: Animation | null;
+		isClosing: boolean;
+		isExpanding: boolean;
+
+		constructor(el: HTMLDetailsElement) {
+			this.el = el;
+			this.summary = el.querySelector('summary')!;
+			this.content = el.querySelector('div')!;
+
+			this.animation = null;
+			this.isClosing = false;
+			this.isExpanding = false;
+			this.summary.addEventListener('click', (e) => this.onClick(e));
+		}
+
+		onClick(e: Event) {
+			e.preventDefault();
+			this.el.style.overflow = 'hidden';
+			if (this.isClosing || !this.el.open) {
+				this.open();
+			} else if (this.isExpanding || this.el.open) {
+				this.shrink();
+			}
+		}
+
+		shrink() {
+			this.isClosing = true;
+			const startHeight = `${this.el.offsetHeight}px`;
+			const endHeight = `${this.summary.offsetHeight}px`;
+
+			const arrow = this.summary.querySelector('svg');
+			if (arrow) {
+				arrow.style.transform = 'rotate(0deg)';
+			}
+
+			if (this.animation) {
+				this.animation.cancel();
+			}
+
+			this.animation = this.el.animate({
+				height: [startHeight, endHeight]
+			}, {
+				duration: 250,
+				easing: 'ease-out'
+			});
+
+			this.animation.onfinish = () => this.onAnimationFinish(false);
+			this.animation.oncancel = () => this.isClosing = false;
+		}
+
+		open() {
+			this.el.style.height = `${this.el.offsetHeight}px`;
+			this.el.open = true;
+			window.requestAnimationFrame(() => this.expand());
+		}
+
+		expand() {
+			this.isExpanding = true;
+			const startHeight = `${this.el.offsetHeight}px`;
+			const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
+
+			const arrow = this.summary.querySelector('svg');
+			if (arrow) {
+				arrow.style.transform = 'rotate(180deg)';
+			}
+
+			if (this.animation) {
+				this.animation.cancel();
+			}
+
+			this.animation = this.el.animate({
+				height: [startHeight, endHeight]
+			}, {
+				duration: 250,
+				easing: 'ease-out'
+			});
+
+			this.animation.onfinish = () => this.onAnimationFinish(true);
+			this.animation.oncancel = () => this.isExpanding = false;
+		}
+
+		onAnimationFinish(open: boolean) {
+			this.el.open = open;
+			this.animation = null;
+			this.isClosing = false;
+			this.isExpanding = false;
+			this.el.style.height = '';
+			this.el.style.overflow = '';
+		}
+	}
+
+	document.querySelectorAll('#archive details').forEach((el) => {
+		new Accordion(el as HTMLDetailsElement);
+	});
+</script>

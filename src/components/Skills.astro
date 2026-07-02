@@ -1,0 +1,85 @@
+---
+const skillGroups = [
+	{
+		name: 'Frontend',
+		skills: [
+			{ mark: 'TS', label: 'TypeScript', icon: '/skills-icons/typescript.svg' },
+			{ mark: 'R', label: 'React', icon: '/skills-icons/React_dark.svg' },
+			{ mark: 'N', label: 'Next.js', icon: '/skills-icons/nextjs_icon_dark.svg' },
+			{ mark: 'V', label: 'Vue.js', icon: '/skills-icons/vue.svg' },
+			{ mark: 'A', label: 'Astro', icon: '/skills-icons/Astro_dark.svg' },
+			{ mark: 'S', label: 'Swift', icon: '/skills-icons/swift.svg' },
+		],
+	},
+	{
+		name: 'Backend',
+		skills: [
+			{ mark: 'NJ', label: 'NestJS', icon: '/skills-icons/nestjs.svg' },
+			{ mark: 'EX', label: 'Express', icon: '/skills-icons/Express.js_dark.svg' },
+			{ mark: 'PG', label: 'PostgreSQL', icon: '/skills-icons/postgresql.svg' },
+			{ mark: 'R', label: 'Redis', icon: '/skills-icons/redis.svg' },
+			{ mark: 'P', label: 'Prisma', icon: '/skills-icons/Prisma_dark.svg' },
+			{ mark: 'S', label: 'Supabase', icon: '/skills-icons/supabase.svg' },
+			{ mark: 'Dk', label: 'Docker', icon: '/skills-icons/docker.svg' },
+			{ mark: 'CF', label: 'Cloudflare', icon: '/skills-icons/cloudflare.svg' },
+			{ mark: 'GC', label: 'Google Cloud', icon: '/skills-icons/google-cloud.svg' },
+			{ mark: 'PHP', label: 'PHP', icon: '/skills-icons/Php_dark.svg' },
+		],
+	},
+	{
+		name: 'General Tooling',
+		skills: [
+			{ mark: 'G', label: 'Git', icon: '/skills-icons/git.svg' },
+			{ mark: 'PN', label: 'pnpm', icon: '/skills-icons/Pnpm_dark.svg' },
+			{ mark: 'V', label: 'Vite', icon: '/skills-icons/vite.svg' },
+			{ mark: 'VL', label: 'Vercel', icon: '/skills-icons/Vercel_dark.svg' },
+			{ mark: 'N', label: 'Netlify', icon: '/skills-icons/netlify.svg' },
+			{ mark: 'WP', label: 'WordPress', icon: '/skills-icons/wordpress.svg' },
+			{ mark: 'F', label: 'Figma', icon: '/skills-icons/figma.svg' },
+		],
+	},
+	{
+		name: 'Agentic Coding',
+		skills: [
+			{ mark: 'CC', label: 'Claude Code', icon: '/skills-icons/claude-ai-icon.svg' },
+			{ mark: 'CX', label: 'Codex', icon: '/skills-icons/Codex_dark.svg' },
+			{ mark: 'C', label: 'Cursor', icon: '/skills-icons/Cursor_dark.svg' },
+			{ mark: 'A', label: 'Antigravity', icon: '/skills-icons/antigravity.svg' },
+			{ mark: 'HA', label: 'Hermes Agent', icon: '/skills-icons/hermes-agent-logo-dark.svg' },
+		],
+	},
+];
+
+const sectionClass = 'max-lg:w-[87%] mx-auto max-w-3xl py-10';
+---
+
+<section id="skills" class={sectionClass}>
+	<h2 class="text-pretty text-2xl font-bold tracking-tight"><span class="sr-only">My </span>Skills</h2>
+	<p class="text-balance pt-3 text-zinc-400">Tools come and go, and every so often something new promises to make this craft obsolete. I've learned not to bet against it.</p>
+	<p class="text-balance pt-2 pb-6 text-zinc-400">What keeps me going is curiosity, going deep where it counts while staying broad enough to adapt, and the habit of growing with whatever comes next.</p>
+	<dl class="divide-y divide-zinc-800">
+		{
+			skillGroups.map((group) => (
+				<div class="grid gap-y-3 py-6 sm:grid-cols-[7.5rem_1fr] sm:gap-x-8">
+					<dt class="pt-0.5 text-xs font-semibold uppercase tracking-normal text-zinc-400">{group.name}</dt>
+					<dd>
+						<ul class="flex flex-wrap gap-x-5 gap-y-3.5">
+							{group.skills.map((skill) => (
+								<li class="group inline-flex items-center gap-2">
+									{
+										skill.icon ? (
+											<img src={skill.icon} alt="" aria-hidden="true" loading="lazy" decoding="async" width="20" height="20" class="size-5 shrink-0 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-0.5" />
+										) : (
+											<span class="grid size-5 shrink-0 place-items-center rounded bg-zinc-800 text-[0.625rem] font-bold text-zinc-50 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-0.5">{skill.mark}</span>
+										)
+									}
+									<span class="text-[0.9375rem] font-medium tracking-normal text-zinc-400 transition-colors duration-300 group-hover:text-zinc-50">{skill.label}</span>
+								</li>
+							))}
+						</ul>
+					</dd>
+				</div>
+			))
+		}
+	</dl>
+</section>

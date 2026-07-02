@@ -1,11 +1,50 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
+import Skills from '../components/Skills.astro';
+import Blogs from '../components/Blogs.astro';
+import Archive from '../components/Archive.astro';
+import Footer from '../components/Footer.astro';
+import Navbar from '../components/Navbar.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pageTitle = "Aditya Argadinata - Pragmatic Software Engineer";
+const pageDescription = "Portfolio of Aditya Argadinata, a pragmatic software engineer building maintainable POS systems, mobile APIs, and high-performance apps.";
+
+const personSchema = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": "Aditya Argadinata",
+	"url": "https://argz.dev",
+	"jobTitle": "Software Engineer",
+	"sameAs": [
+		"https://github.com/AdityaArgadinata",
+		"https://www.linkedin.com/in/aditya-argadinata/"
+	]
+});
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={pageTitle} description={pageDescription}>
+	<head slot="head">
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://argz.dev" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<script type="application/ld+json" is:inline set:html={personSchema} />
+	</head>
+
+	<main id="main">
+		<Hero />
+		<Experience />
+		<Skills />
+		<Blogs />
+		<Archive />
+		<Footer />
+	</main>
+
+	<Navbar />
 </Layout>
+

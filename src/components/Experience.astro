@@ -1,0 +1,91 @@
+---
+interface ExperienceItem {
+	period: string;
+	title: string;
+	company: string;
+	description: string;
+	current?: boolean;
+	external?: boolean;
+	points?: string[];
+}
+
+const experiences: ExperienceItem[] = [
+	{
+		period: "Dec 2024 - Present",
+		title: "Software Engineer",
+		company: "BBO (PT Bizgital Indonesia)",
+		description:
+			"Built and improved BBO POS for 300+ businesses, covering POS features, mobile APIs, billing, payments, access control, and performance optimization.",
+		current: true,
+	},
+	{
+		period: "Feb 2025 - Jul 2025",
+		title: "Internship",
+		company: "Bangkit Academy",
+		description:
+			"Joined Bangkit Academy to strengthen practical software engineering, collaboration, and production-ready problem solving.",
+	},
+	{
+		period: "Aug 2022 - Dec 2023",
+		title: "Backend Developer",
+		company: "Esoffplay",
+		description:
+			"Learned backend development in an internal PHP environment, working with server-side workflows and database-backed features.",
+	},
+];
+
+const sectionClass = "max-lg:w-[87%] mx-auto max-w-3xl py-10";
+---
+
+<section id="experience" class={sectionClass}>
+	<h2 class="text-pretty text-2xl font-bold tracking-tight">
+		<span class="sr-only">My </span>Experience
+	</h2>
+	<p class="text-balance pt-3 pb-6 text-zinc-400">
+		A quick ledger of where I've worked and what I shipped. The longer story
+		lives further down.
+	</p>
+	<ol class="divide-y divide-zinc-800">
+		{
+			experiences.map((experience) => (
+				<li class="group grid gap-y-1.5 py-6 sm:grid-cols-[11rem_1fr] sm:gap-x-8">
+					<p class="flex items-center gap-1.5 pt-0.5 text-sm tabular-nums text-zinc-400">
+						{experience.period}
+						{experience.current && (
+							<span
+								aria-hidden="true"
+								class="size-1.5 shrink-0 rounded-full bg-emerald-500 motion-safe:animate-pulse"
+							/>
+						)}
+					</p>
+					<div>
+						<p class="font-semibold tracking-tight text-pretty">
+							{experience.title}
+							<span class="font-normal text-zinc-400"> &middot; </span>
+							{experience.company}
+							{experience.external && <span aria-hidden="true">&nearr;</span>}
+						</p>
+						<p class="pt-1 text-[0.9375rem] text-zinc-400">
+							{experience.description}
+						</p>
+						{experience.points && (
+							<ul class="list-disc space-y-1.5 pt-3 pl-4 text-[0.9375rem] text-zinc-400">
+								{experience.points.map((point) => (
+									<li>{point}</li>
+								))}
+							</ul>
+						)}
+					</div>
+				</li>
+			))
+		}
+	</ol>
+	<p class="pt-4 text-zinc-400">
+		You can see a complete profile on <a
+			href="/AdityaArgadinata.pdf"
+			target="_blank"
+			rel="noopener"
+			class="underline transition-colors hover:text-zinc-50">my Resume&nearr;</a
+		>
+	</p>
+</section>

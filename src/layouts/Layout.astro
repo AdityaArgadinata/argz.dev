@@ -1,23 +1,30 @@
+---
+import '../styles/global.css';
+
+const { 
+	title = 'Argz',
+	description = 'Software Engineer Portfolio - Pragmatic builder of maintainable apps.'
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		
+		<!-- SEO Basics -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="Aditya Argadinata" />
+		<meta name="keywords" content="Aditya Argadinata, Aditya, Argadinata, Software Engineer, Frontend Developer, Backend Developer, Astro, React, POS, BBO, Yogyakarta, Kudus" />
+		<link rel="canonical" href={Astro.url.toString()} />
+		
+		<slot name="head" />
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
