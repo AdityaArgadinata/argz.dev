@@ -63,12 +63,12 @@ const sectionClass = 'max-lg:w-[87%] mx-auto max-w-3xl py-10';
 
 <section id="archive" class={sectionClass}>
 	<h2 class="text-pretty text-2xl font-bold pb-4 tracking-tight"><span class="sr-only">My Journey in Software Engineering - </span>Archive</h2>
-	<p class="text-balance pb-4">I started my software engineering journey in 2019, and ever since, I've been passionate about creating meaningful work. But there's more to recall.</p>
+	<p class="text-balance pb-4 text-zinc-400">I started my software engineering journey in 2019, and ever since, I've been passionate about creating meaningful work. But there's more to recall.</p>
 	<div class="relative flex w-full flex-col before:absolute before:top-[1.875rem] before:bottom-[1.875rem] before:left-0 before:w-0.5 before:bg-zinc-800">
 		{
 			archiveItems.map((item, index) => (
 				<details class="group relative border-none before:absolute before:top-[1.875rem] before:left-0 before:h-0.5 before:w-5 before:bg-zinc-800">
-					<summary class="group relative flex cursor-pointer items-start justify-between rounded-md py-4 pr-4 pl-6 text-left text-xl font-semibold outline-none transition-all marker:hidden focus-visible:ring-3 focus-visible:ring-zinc-500/50">
+					<summary class="group relative flex cursor-pointer items-start justify-between rounded-md py-4 pr-4 pl-6 text-left text-base font-semibold outline-none transition-all marker:hidden focus-visible:ring-3 focus-visible:ring-zinc-500/50 sm:text-lg">
 						{index === 0 && <span aria-hidden="true" class="absolute top-[1.3125rem] -left-[0.5625rem] hidden size-5 rounded-full bg-emerald-500/75 motion-safe:animate-ping sm:block" />}
 						<span aria-hidden="true" class:list={['absolute top-[1.4688rem] -left-1.5 size-3.5 rounded-full border-2', index === 0 ? 'border-emerald-500 bg-emerald-500' : 'border-zinc-800 bg-zinc-950']} />
 						<span><span class="text-zinc-400">{item.year}</span><span class="sr-only">{item.title}</span><span aria-hidden="true"> - {item.title}</span></span>
