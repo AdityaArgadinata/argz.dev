@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
 
 const { 
 	title = 'Argz',
@@ -26,5 +27,6 @@ const {
 	</head>
 	<body>
 		<slot />
+		<Navbar />
 	</body>
 </html>
